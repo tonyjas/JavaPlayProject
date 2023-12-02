@@ -3,8 +3,6 @@ package com.jasynewycz.java.playarea.aoc;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Day2Puzzle1 {
 
@@ -16,7 +14,6 @@ public class Day2Puzzle1 {
     public static void main(String[] args) {
 
         try {
-//            long total = Files.lines(Path.of("./src/main/resources/com/jasynewycz/java/playarea/aoc/day2puzzle1testdata.txt"))
             long total = Files.lines(Path.of("./src/main/resources/com/jasynewycz/java/playarea/aoc/day2puzzle1realdata.txt"))
                     .map(Day2Puzzle1::parseLine)
                     .filter(Day2Puzzle1::isValid)
