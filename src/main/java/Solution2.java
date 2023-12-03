@@ -44,8 +44,36 @@ class Solution2 {
         System.out.println(sol.longestPalindrome2("bb"));
         System.out.println(sol.longestPalindrome2(""));
         System.out.println(sol.longestPalindrome2("b"));
+
+        System.out.println(convert("PAYPALISHIRING", 3));
     }
 
+
+    public static String convert(String s, int numRows) {
+        StringBuilder[] builders = new StringBuilder[numRows];
+        for(int i = 0; i < builders.length; i++) {
+            builders[i] = new StringBuilder();
+        }
+
+        boolean incrementing = true;
+        int builderIndex = 0;
+        for (int x = 0; x < s.length()-1; x++) {
+            builders[builderIndex].append(s.charAt(x));
+            if(incrementing) builderIndex++;
+            else builderIndex--;
+            if(builderIndex == 0 || builderIndex >= builders.length-1) {
+                incrementing = !incrementing;
+            }
+        }
+
+        StringBuilder finalString = new StringBuilder();
+
+        for(StringBuilder builder : builders) {
+            finalString.append(builder.toString());
+        }
+
+        return finalString.toString();
+    }
     public String longestPalindrome2(String s) {
         return "";
 
