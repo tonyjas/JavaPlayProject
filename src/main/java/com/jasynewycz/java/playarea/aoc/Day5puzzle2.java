@@ -52,7 +52,6 @@ public class Day5puzzle2 {
 
         String[] preSeeds = lines.get(0).substring(7).split(" ");
 
-
         List<RangeMapper> seedToSoilList = new ArrayList<>();
         List<RangeMapper> soilToFertilizerList = new ArrayList<>();
         List<RangeMapper> fertilizerToWaterList = new ArrayList<>();
