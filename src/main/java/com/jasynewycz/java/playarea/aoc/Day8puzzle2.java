@@ -47,9 +47,9 @@ public class Day8puzzle2 {
 
 
 
-
+/*
         while(!Arrays.stream(values).allMatch(s -> s.endsWith("Z"))) {
-            noOfSteps++;
+
             if(noOfSteps % 100_000_000 == 0) {
                 System.out.println("Steps: " + noOfSteps);
             }
@@ -70,8 +70,10 @@ public class Day8puzzle2 {
                 }
             }
             x++;
+            noOfSteps++;
         }
-/**
+        **/
+
         long[] intSeedValues = new long[] {17141, 13207, 18827, 22199, 16579, 12083};
         long[] currentValues = Arrays.copyOf(intSeedValues, 6);
 
@@ -99,8 +101,6 @@ public class Day8puzzle2 {
         }
 
         System.out.println("Answer: " + Arrays.toString(currentValues));
-
-*/
 
         System.out.println(noOfSteps);
     }
