@@ -1,0 +1,98 @@
+package com.jasynewycz.java.playarea.aoc;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+
+public class Day11puzzle2 {
+
+
+    record Point(int x, int y) {
+
+    }
+    public static void main(String[] args) throws IOException {
+
+        List<String> lines = Files.readAllLines(Path.of("./src/main/resources/com/jasynewycz/java/playarea/aoc/day11puzzle1realdata.txt"));
+
+        List<String> newLines = new ArrayList<>();
+
+        Set<Integer> galaxyCols = new TreeSet<>();
+        Map<Integer, Integer> noGalaxyCols = new HashMap<>();
+        Map<Integer, Integer> noGalaxyRows = new HashMap<>();
+
+        int noOfEmptyRows = 0;
+
+        // create grid of galaxies and add lines to account for time slip/expansion
+        for (int x = 0; x < lines.size() ; x++) {
+            newLines.add(lines.get(x));
+
+            if(!lines.get(x).contains("#")) {
+                noOfEmptyRows++;
+
+            } else {
+
+                String temp = lines.get(x);
+                int start = 0;
+                do {
+                    start = temp.indexOf("#", start);
+                    if(start != -1) {
+                        galaxyCols.add(start);
+                    }
+                    start++;
+                } while (start != 0);
+            }
+            noGalaxyRows.put(x, noOfEmptyRows);
+        }
+
+        System.out.println(newLines);
+        System.out.println(galaxyCols);
+
+        int noOfEmptyCols = 0;
+
+        for (int x = 0; x < lines.get(0).length(); x++) {
+            if(!galaxyCols.contains(x)) {
+                noOfEmptyCols++;
+            }
+            noGalaxyCols.put(x, noOfEmptyCols);
+        }
+
+        System.out.println(noGalaxyRows);
+        System.out.println(noGalaxyCols);
+
+        char[][] data = new char[newLines.size()][newLines.get(0).length() + noGalaxyCols.size()];
+        Map<Integer, Point> galaxies = new HashMap<>();
+
+        int galaxyNumber = 1;
+        int spaceMultiplier = 999_999;
+
+        for(int x = 0; x < newLines.size(); x++) {
+            String line = newLines.get(x);
+
+            for (int y = 0; y < line.length(); y++) {
+
+                data[x][y] = line.charAt(y);
+                if (data[x][y] == '#') {
+                    int x_axis = x + (spaceMultiplier * noGalaxyRows.get(x));
+                    int y_axis = y + (spaceMultiplier * noGalaxyCols.get(y));
+                    galaxies.put(galaxyNumber++, new Point(x_axis, y_axis));
+                }
+            }
+        }
+
+        System.out.println(galaxies);
+
+        long total = 0;
+        // now find the distances between
+        for (int x = 1; x <= galaxies.size(); x++) {
+            Point galaxyA = galaxies.get(x);
+            for(int y = x+1; y <= galaxies.size(); y++) {
+                Point galaxyB = galaxies.get(y);
+                total += Math.abs((long)galaxyA.x - galaxyB.x) + Math.abs(galaxyA.y - galaxyB.y);
+            }
+        }
+
+        System.out.println(total);
+    }
+
+}
