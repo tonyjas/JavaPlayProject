@@ -36,6 +36,10 @@ public class Day14puzzle1 {
             }
         }
 
+
+
+
+
         System.out.println(total);
     }
 
@@ -45,4 +49,5 @@ public class Day14puzzle1 {
         array[x][y] = array[x][oldY];
         array[x][oldY] = temp;
     }
+
 }
