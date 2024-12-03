@@ -1,13 +1,40 @@
 package academy.learnprogramming.algorithm.kmp;
 
 import org.junit.Assert;
+
 import org.junit.jupiter.api.Test;
 
 public class KnuthMorrisPrattTest {
 
+    KnuthMorrisPratt kmp= new KnuthMorrisPratt();
+
+    @Test
+    public void searchTest() {
+        String array = "abazacabababac";
+        String pattern = "ababac";
+        int index = kmp.search(array.toCharArray(), pattern.toCharArray());
+        Assert.assertEquals(8, index);
+
+        array = "aabaaabacaz";
+        pattern = "aabacaz";
+        index = kmp.search(array.toCharArray(), pattern.toCharArray());
+        Assert.assertEquals(4, index);
+
+        array = "this is a test";
+        pattern = "is a";
+        index = kmp.search(array.toCharArray(), pattern.toCharArray());
+        Assert.assertEquals(5, index);
+
+        array = "cantfindthe index";
+        pattern = "foo";
+        index = kmp.search(array.toCharArray(), pattern.toCharArray());
+        Assert.assertEquals(-1, index);
+
+    }
+
+
     @Test
     public void computeLSPTableTest() {
-        KnuthMorrisPratt kmp = new KnuthMorrisPratt();
 
         int[] actual = kmp.computeLSPTable(new char[]{'a','b','a','b','a','c'});
         int[] expect = new int[]{0,0,1,2,3,0};
